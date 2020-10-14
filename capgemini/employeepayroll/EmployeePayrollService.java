@@ -14,13 +14,13 @@ public class EmployeePayrollService {
 	public EmployeePayrollService() {
 	}
 
+	/**
+	 * @param employeePayrollList
+	 */
 	public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
 		this.employeePayrollList = employeePayrollList;
 	}
 
-	/**
-	 * @param args employeePayrollList
-	 */
 	public static void main(String[] args) {
 		List<EmployeePayrollData> employeePayrollList = new ArrayList<EmployeePayrollData>();
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
@@ -43,7 +43,7 @@ public class EmployeePayrollService {
 	}
 
 	/**
-	 * Employee Payroll To Console
+	 * Payroll To Console
 	 */
 	private void writeEmployeeData() {
 		System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
