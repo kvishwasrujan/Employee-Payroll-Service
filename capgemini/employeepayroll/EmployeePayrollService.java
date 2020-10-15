@@ -50,6 +50,13 @@ public class EmployeePayrollService {
 	}
 
 	/**
+	 * @param ioService Print Data
+	 */
+	public void printData(IOService ioService) {
+		new EmployeePayrollFileIOService().printData();
+	}
+
+	/**
 	 * @param ioService
 	 * @return number of entries
 	 */
@@ -58,4 +65,16 @@ public class EmployeePayrollService {
 			return new EmployeePayrollFileIOService().countEntries();
 		return 0;
 	}
+
+	/**
+	 * @param ioService
+	 * @return Employee Payroll Data List
+	 */
+	public List<EmployeePayrollData> readData(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO))
+			return new EmployeePayrollFileIOService().readData();
+		else
+			return null;
+	}
+
 }
