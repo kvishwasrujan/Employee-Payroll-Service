@@ -3,6 +3,9 @@ package com.capgemini.employeepayroll;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import com.capgemini.watchservice.Java8WatchService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -50,5 +53,11 @@ class EmployeePayrollServiceTest {
 		System.out.println("Files.newDirectory with temp");
 		Files.newDirectoryStream(playPath, path -> path.toFile().isFile() && path.toString().contains("temp"))
 				.forEach(System.out::println);
+	}
+
+	public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+		Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+		Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+		new Java8WatchService(dir).processEvents();
 	}
 }
