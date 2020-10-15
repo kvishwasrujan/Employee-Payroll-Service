@@ -1,0 +1,3 @@
+id = 1, name = Virat Kohli, salary = 100000.0
+id = 2, name = Rohit Sharma, salary = 200000.0
+id = 3, name = Dale Steyn, salary = 300000.0

@@ -9,14 +9,11 @@ public class EmployeePayrollService {
 		CONSOLE_IO, FILE_IO, DB_IO, REST_IO
 	}
 
-	private List<EmployeePayrollData> employeePayrollList;
+	public List<EmployeePayrollData> employeePayrollList;
 
 	public EmployeePayrollService() {
 	}
 
-	/**
-	 * @param employeePayrollList
-	 */
 	public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
 		this.employeePayrollList = employeePayrollList;
 	}
@@ -26,13 +23,13 @@ public class EmployeePayrollService {
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
 		Scanner consoleInputReader = new Scanner(System.in);
 		employeePayrollService.readEmployeeData(consoleInputReader);
-		employeePayrollService.writeEmployeeData();
+		employeePayrollService.writeEmployeeData(IOService.CONSOLE_IO);
 	}
 
 	/**
-	 * @param consoleInputReader
+	 * @param consoleInputReader Read employee data
 	 */
-	private void readEmployeeData(Scanner consoleInputReader) {
+	public void readEmployeeData(Scanner consoleInputReader) {
 		System.out.println("Enter employee ID : ");
 		int id = Integer.parseInt(consoleInputReader.nextLine());
 		System.out.println("Enter employee name : ");
@@ -43,9 +40,22 @@ public class EmployeePayrollService {
 	}
 
 	/**
-	 * Payroll To Console
+	 * Write payroll data to console
 	 */
-	private void writeEmployeeData() {
-		System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
+	public void writeEmployeeData(IOService ioService) {
+		if (ioService.equals(IOService.CONSOLE_IO))
+			System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
+		else if (ioService.equals(IOService.FILE_IO))
+			new EmployeePayrollFileIOService().writeData(employeePayrollList);
+	}
+
+	/**
+	 * @param ioService
+	 * @return number of entries
+	 */
+	public long countEntries(IOService ioService) {
+		if (ioService.equals(IOService.FILE_IO))
+			return new EmployeePayrollFileIOService().countEntries();
+		return 0;
 	}
 }
